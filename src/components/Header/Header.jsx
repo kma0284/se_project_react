@@ -1,5 +1,6 @@
 import "./Header.css";
-
+import Logo from "../../assets/logo";
+import Avatar from "../../assets/avatar";
 function Header() {
   return (
     <header className="header">
