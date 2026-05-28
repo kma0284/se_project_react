@@ -1,15 +1,15 @@
 import "./Header.css";
-import Logo from "../../assets/logo";
-import Avatar from "../../assets/avatar";
+import logo from "../../assets/logo.svg";
+import avatar from "../../assets/avatar.png";
 function Header() {
   return (
     <header className="header">
-      <img src="" alt="" className="header__image" />
-      <p className="header__date-and-location">date location</p>
-      <button className="header__add-clithes-btn">+ Add clothes</button>
+      <img src={logo} alt="logo" className="header__logo" />
+      <p className="header__date-and-location">date, location</p>
+      <button className="header__add-clothes-btn">+ Add clothes</button>
       <div className="header__user-container">
         <p className="header__username">name</p>
-        <img src="" alt="" className="header__avatar" />
+        <img src={avatar} alt="avatar image" className="header__avatar" />
       </div>
     </header>
   );

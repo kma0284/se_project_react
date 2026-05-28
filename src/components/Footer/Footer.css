@@ -1,0 +1,16 @@
+.footer {
+  align-items: center;
+  display: flex;
+  padding: 0 0 24px 0;
+
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 16px;
+}
+.creator {
+  margin: 0;
+}
+.copyright {
+  margin: 0 0 0 auto;
+}
