@@ -1,5 +1,6 @@
 // The utils files contain default clothing items
-const defaultClothingItems = [
+
+export const defaultClothingItems = [
   {
     _id: 1,
     name: "Boot",
@@ -98,4 +99,45 @@ const defaultClothingItems = [
   },
 ];
 
-export { defaultClothingItems };
+import SunnyDay from "../assets/sunnyDay.png";
+import SunnyNight from "../assets/SunnyNight.png";
+import CloudyDay from "../assets/cloudyDay.png";
+import CloudyNight from "../assets/cloudyNight.png";
+import RainyDay from "../assets/rainyDay.png";
+import RainyNight from "../assets/rainyNight.png";
+import StormyDay from "../assets/stormDay.png";
+import StormyNight from "../assets/stormNight.png";
+import SnowyDay from "../assets/snowDay.png";
+import SnowyNight from "../assets/snowyNight.png";
+import FogDay from "../assets/fogDay.png";
+import Fognight from "../assets/fogNight.png";
+
+export const weatherCards = [
+  {
+    Sunny: {
+      day: sunnyDay,
+      night: clearNight,
+    },
+    Cloudy: {
+      day: cloudyDay,
+      night: cloudyNight,
+    },
+    Rain: {
+      day: rainyDay,
+      night: rainyNight,
+    },
+    Storm: {
+      day: stormyDay,
+      night: stormyNight,
+    },
+    Snow: {
+      day: snowyDay,
+      night: snowyNight,
+    },
+    Fog: {
+      day: fogDay,
+      night: fogNight,
+    },
+    default: sunnyDay,
+  },
+];
