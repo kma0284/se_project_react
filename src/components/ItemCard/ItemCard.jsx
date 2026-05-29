@@ -1,6 +1,11 @@
 import "./ItemCard.css";
 import { defaultClothingItems } from "../../utils/constants";
-function ItemCard() {
-  return <div className="item__card"></div>;
+function ItemCard({ item }) {
+  return (
+    <li className="card">
+      <h2 className="card__name">{item.name}</h2>
+      <img className="card__image" src={item.link} alt={item.name}></img>{" "}
+    </li>
+  );
 }
 export default ItemCard;

@@ -2,12 +2,12 @@ import "./WeatherCard.css";
 import SunnyDay from "../../assets/sunnyDay.png";
 
 import { weatherCards } from "../../utils/constants";
-function WeatherCard() {
+function WeatherCard({}) {
   return (
     <section className="weather__card">
       <p className="weather-card__temp"> </p>
       <img
-        src={SunnyDay}
+        src={weatherCards}
         alt="weather banner"
         className="weather-card__image"
       />

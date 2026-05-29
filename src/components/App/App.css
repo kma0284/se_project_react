@@ -1,6 +1,7 @@
 .page {
   background-color: #f3f3f3;
   padding: 0 40px;
+  max-width: 1440px;
 }
 .page__content {
   max-width: 1360px;
