@@ -1,17 +1,67 @@
 // The utils files contain default clothing items
 
-import SunnyDay from "../assets/sunnyDay.png";
-import SunnyNight from "../assets/sunnyNight.png";
-import CloudyDay from "../assets/cloudyDay.png";
-import CloudyNight from "../assets/cloudyNight.png";
-import RainyDay from "../assets/rainyDay.png";
-import RainyNight from "../assets/rainyNight.png";
-import StormyDay from "../assets/stormDay.png";
-import StormyNight from "../assets/stormyNight.png";
-import SnowyDay from "../assets/snowDay.png";
-import SnowyNight from "../assets/snowyNight.png";
-import FogDay from "../assets/fogDay.png";
-import FogNight from "../assets/fogNight.png";
+export const weatherOptions = [
+  {
+    day: true,
+    condition: "clear",
+    url: ("../assets/day/clear.png", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "cloudy",
+    url: ("../assets/day/cloudy.png", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "rain",
+    url: ("../assets/day/rain.png", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "snow",
+    url: ("../assets/day/snow.png", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "storm",
+    url: ("../assets/day/storm.png", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "fog",
+    url: ("../assets/day/fog.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "clear",
+    url: ("../assets/night/clear.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "cloudy",
+    url: ("../assets/night/cloudy.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "rain",
+    url: ("../assets/night/rain.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "snow",
+    url: ("../assets/night/snow.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "storm",
+    url: ("../assets/night/storm.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "fog",
+    url: ("../assets/night/fog.png", import.meta.url).href,
+  },
+];
 
 export const defaultClothingItems = [
   {
@@ -110,18 +160,4 @@ export const defaultClothingItems = [
     weather: "hot",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09",
   },
-];
-
-export const weatherCards = [
-  {
-    id: "Sunny",
-    day: SunnyDay,
-    night: SunnyNight,
-  },
-  { id: "Cloudy", day: CloudyDay, night: CloudyNight },
-  { id: "Rain", day: RainyDay, night: RainyNight },
-  { id: "Storm", day: StormyDay, night: StormyNight },
-  { id: "Snow", day: SnowyDay, night: SnowyNight },
-  { id: "Fog", day: FogDay, night: FogNight },
-  { id: "defaulted", day: SunnyDay, night: SunnyNight },
 ];

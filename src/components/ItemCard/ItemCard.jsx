@@ -1,10 +1,18 @@
 import "./ItemCard.css";
 import { defaultClothingItems } from "../../utils/constants";
-function ItemCard({ item }) {
+function ItemCard({ item, itemCardClick }) {
+  const handleCardClick = () => {
+    onCardClick(item);
+  };
   return (
     <li className="card">
       <h2 className="card__name">{item.name}</h2>
-      <img className="card__image" src={item.link} alt={item.name}></img>{" "}
+      <img
+        onClick={handleCardClick}
+        className="card__image"
+        src={item.link}
+        alt={item.name}
+      ></img>{" "}
     </li>
   );
 }
