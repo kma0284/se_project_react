@@ -1,14 +1,21 @@
 import "./ModalWithForm.css";
+
 function ModalWithForm({ children, buttonText, title, activeModal, onClose }) {
   return (
-    <div className={`${activeModal === "add-garment" && "modal__opened"}`}>
-      <div className="modal__content">
+    <div
+      className={`modal ${activeModal === "add-garment" ? "modal__opened" : ""}`}
+      onClick={onClose}
+    >
+      <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         <h2 className="modal__title">{title}</h2>
+
         <button onClick={onClose} type="button" className="modal__close">
           CLOSE
-        </button>{" "}
-        <form action="" className="modal__form">
+        </button>
+
+        <form className="modal__form">
           {children}
+
           <button type="submit" className="modal__submit">
             {buttonText}
           </button>
@@ -17,4 +24,5 @@ function ModalWithForm({ children, buttonText, title, activeModal, onClose }) {
     </div>
   );
 }
+
 export default ModalWithForm;

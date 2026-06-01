@@ -9,9 +9,11 @@
   align-items: center;
   visibility: hidden;
 }
-.modal_opened {
+
+.modal__opened {
   visibility: visible;
 }
+
 .modal__title {
   margin: 0;
 }

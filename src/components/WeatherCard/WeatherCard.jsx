@@ -1,18 +1,27 @@
 import "./WeatherCard.css";
-// import { weatherOptions } from "../../utils/constants.js";
-function WeatherCard({ weatherData }) {
-  // const weatherOption = weatherOption.filter((option) => {
-  //   return option.day === weatherData.isDay;
-  // });
+import { weatherOptions } from "../../utils/constants";
+
+export function WeatherCard({ weatherData }) {
+  const weatherOption = weatherOptions.find((option) => {
+    return (
+      option.day === weatherData.isDay &&
+      option.condition === weatherData.condition
+    );
+  });
+  console.log("condition:", weatherData.condition);
+  console.log("isDay:", weatherData.isDay);
+  console.log("weatherOption:", weatherOption);
   return (
-    <section className="weather__card">
-      <p className="weather-card__temp"> {weatherData.temp.F} &deg;</p>
+    <section className="weather-card">
+      <p className="weather-card__temp">{weatherData.temp.f}°</p>
+
       <img
-        src={weatherCards}
-        alt="weather banner"
+        src={weatherOption?.url}
+        alt={weatherData.condition}
         className="weather-card__image"
       />
     </section>
   );
 }
+
 export default WeatherCard;

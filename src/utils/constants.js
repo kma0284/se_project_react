@@ -1,65 +1,67 @@
 // The utils files contain default clothing items
 
+export const APIkey = "2e9014c51ecac7a69e804a5fd3b52afb";
+
 export const weatherOptions = [
   {
     day: true,
     condition: "clear",
-    url: ("../assets/day/clear.png", import.meta.url).href,
+    url: new URL("../assets/day/clear.png", import.meta.url).href,
   },
   {
     day: true,
-    condition: "cloudy",
-    url: ("../assets/day/cloudy.png", import.meta.url).href,
+    condition: "clouds",
+    url: new URL("..//assets/day/cloudy.png", import.meta.url).href,
   },
   {
     day: true,
     condition: "rain",
-    url: ("../assets/day/rain.png", import.meta.url).href,
+    url: new URL("../assets/day/rain.png", import.meta.url).href,
   },
   {
     day: true,
     condition: "snow",
-    url: ("../assets/day/snow.png", import.meta.url).href,
+    url: new URL("../assets/day/snow.png", import.meta.url).href,
   },
   {
     day: true,
-    condition: "storm",
-    url: ("../assets/day/storm.png", import.meta.url).href,
+    condition: "thunderstorm",
+    url: new URL("../assets/day/storm.png", import.meta.url).href,
   },
   {
     day: true,
     condition: "fog",
-    url: ("../assets/day/fog.png", import.meta.url).href,
+    url: new URL("../assets/day/fog.png", import.meta.url).href,
   },
   {
     day: false,
     condition: "clear",
-    url: ("../assets/night/clear.png", import.meta.url).href,
+    url: new URL("../assets/night/clear.png", import.meta.url).href,
   },
   {
     day: false,
-    condition: "cloudy",
-    url: ("../assets/night/cloudy.png", import.meta.url).href,
+    condition: "clouds",
+    url: new URL("../assets/night/cloudy.png", import.meta.url).href,
   },
   {
     day: false,
     condition: "rain",
-    url: ("../assets/night/rain.png", import.meta.url).href,
+    url: new URL("../assets/night/rain.png", import.meta.url).href,
   },
   {
     day: false,
     condition: "snow",
-    url: ("../assets/night/snow.png", import.meta.url).href,
+    url: new URL("../assets/night/snow.png", import.meta.url).href,
   },
   {
     day: false,
-    condition: "storm",
-    url: ("../assets/night/storm.png", import.meta.url).href,
+    condition: "thunderstorm",
+    url: new URL("../assets/night/storm.png", import.meta.url).href,
   },
   {
     day: false,
     condition: "fog",
-    url: ("../assets/night/fog.png", import.meta.url).href,
+    url: new URL("../assets/night/fog.png", import.meta.url).href,
   },
 ];
 
