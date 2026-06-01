@@ -1,9 +1,28 @@
 import "./ModalWithForm.css";
 
-function ModalWithForm({ children, buttonText, title, activeModal, onClose }) {
+function ModalWithForm({
+  children,
+  buttonText,
+  title,
+  activeModal,
+  onClose,
+  isValid,
+}) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!isValid) return;
+
+    console.log("Valid garment:", values);
+
+    resetForm();
+    onClose();
+  };
   return (
     <div
-      className={`modal ${activeModal === "add-garment" ? "modal__opened" : ""}`}
+      className={`modal ${
+        activeModal === "add-garment" ? "modal__opened" : ""
+      }`}
       onClick={onClose}
     >
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
@@ -13,10 +32,10 @@ function ModalWithForm({ children, buttonText, title, activeModal, onClose }) {
           CLOSE
         </button>
 
-        <form className="modal__form">
+        <form className="modal__form" onSubmit={handleSubmit}>
           {children}
 
-          <button type="submit" className="modal__submit">
+          <button type="submit" className="modal__submit" disabled={!isValid}>
             {buttonText}
           </button>
         </form>
@@ -24,5 +43,4 @@ function ModalWithForm({ children, buttonText, title, activeModal, onClose }) {
     </div>
   );
 }
-
 export default ModalWithForm;
