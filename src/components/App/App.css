@@ -6,4 +6,6 @@
 .page__content {
   max-width: 1360px;
   margin: 0 auto;
+  gap: 28px;
+  padding: 0;
 }

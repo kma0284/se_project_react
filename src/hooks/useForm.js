@@ -8,10 +8,12 @@ export function useForm(initialValues = {}) {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setValues((prev) => ({
-      ...prev,
+    const updatedValues = {
+      ...values,
       [name]: value,
-    }));
+    };
+
+    setValues(updatedValues);
 
     let error = "";
 
@@ -27,10 +29,21 @@ export function useForm(initialValues = {}) {
       }
     }
 
-    setErrors((prev) => ({
-      ...prev,
+    const updatedErrors = {
+      ...errors,
       [name]: error,
-    }));
+    };
+
+    setErrors(updatedErrors);
+
+    const hasErrors = Object.values(updatedErrors).some((err) => err !== "");
+
+    const allFieldsFilled =
+      updatedValues.name.trim() &&
+      updatedValues.imageUrl.trim() &&
+      updatedValues.weather.trim();
+
+    setIsValid(!hasErrors && allFieldsFilled);
   };
 
   const resetForm = () => {
@@ -38,6 +51,14 @@ export function useForm(initialValues = {}) {
     setErrors({});
     setIsValid(false);
   };
+  function isValidUrl(value) {
+    try {
+      new URL(value);
+      return true;
+    } catch {
+      return false;
+    }
+  }
 
   return {
     values,

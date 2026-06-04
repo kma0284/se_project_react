@@ -40,8 +40,14 @@ function ModalWithForm({
         <form className="modal__form" onSubmit={handleSubmit}>
           {children}
 
-          <button type="submit" className="modal__submit" disabled={!isValid}>
-            {buttonText}
+          <button
+            type="submit"
+            className={`modal__submit ${
+              isValid ? "modal__submit_enabled" : ""
+            }`}
+            disabled={!isValid}
+          >
+            Add garment
           </button>
         </form>
       </div>

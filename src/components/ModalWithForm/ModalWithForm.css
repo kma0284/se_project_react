@@ -52,6 +52,7 @@
   margin-top: 8px;
   box-sizing: border-box;
   border-bottom: 1px solid #000000;
+  padding: 8px;
 }
 .modal__input::placeholder {
   font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
@@ -86,8 +87,13 @@
   display: flex;
   gap: 8px;
 }
+
 #modal__radio-input {
   gap: 8px;
+}
+.modal__label_active {
+  color: #000;
+  font-weight: 700;
 }
 .modal__submit {
   width: 124px;
@@ -97,4 +103,23 @@
   font-size: 16px;
   line-height: 20px;
   padding: 8px 16px;
+
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.modal__submit_disabled {
+  background: #0000004d;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+.modal__submit_enabled {
+  background: #000000;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.modal__submit_enabled:hover {
+  opacity: 0.8;
 }

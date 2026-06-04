@@ -13,7 +13,7 @@ export function WeatherCard({ weatherData }) {
   console.log("weatherOption:", weatherOption);
   return (
     <section className="weather-card">
-      <p className="weather-card__temp">{weatherData.temp.f}°</p>
+      <p className="weather-card__temp">{weatherData.temp.f}°F</p>
 
       <img
         src={weatherOption?.url}
