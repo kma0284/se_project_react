@@ -8,15 +8,15 @@ export function WeatherCard({ weatherData }) {
       option.condition === weatherData.condition
     );
   });
-  console.log("condition:", weatherData.condition);
-  console.log("isDay:", weatherData.isDay);
-  console.log("weatherOption:", weatherOption);
+
+  const fallbackUrl = "/default-weather.png";
+
   return (
     <section className="weather-card">
       <p className="weather-card__temp">{weatherData.temp.f}°F</p>
 
       <img
-        src={weatherOption?.url}
+        src={weatherOption?.url || fallbackUrl}
         alt={weatherData.condition}
         className="weather-card__image"
       />

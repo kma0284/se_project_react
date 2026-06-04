@@ -15,7 +15,7 @@ export function Header({ handleAddClick, weatherData, username, setUsername }) {
   };
   return (
     <header className="header">
-      <img src={logo} alt="logo" className="header__logo" />
+      <img src={logo} alt="header logo" className="header__logo" />
       <p className="header__date-and-location">
         {currentDate}, {weatherData.city}
       </p>

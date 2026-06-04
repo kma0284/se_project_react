@@ -88,7 +88,7 @@
   gap: 8px;
 }
 
-#modal__radio-input {
+.modal__radio-input {
   gap: 8px;
 }
 .modal__label_active {
