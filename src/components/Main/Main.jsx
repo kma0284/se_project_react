@@ -7,7 +7,9 @@ function Main({ weatherData, handleCardClick }) {
     <main className="main">
       <WeatherCard weatherData={weatherData} />
       <section className="cards">
-        <p className="cards__text">the weather today is</p>
+        <p className="cards__text">
+          Today is {weatherData.temp.f}° / You may want to wear:
+        </p>
         <ul className="cards__list">
           {defaultClothingItems
             .filter((item) => {

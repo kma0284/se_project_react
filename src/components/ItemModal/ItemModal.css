@@ -2,9 +2,59 @@
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.3s ease;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal__opened {
   visibility: visible;
   opacity: 1;
+}
+.modal__content_type_image {
+  background: #ffffff;
+  border-radius: 8px;
+  position: relative;
+  box-sizing: border-box;
+}
+.modal__image {
+  border-radius: 8px;
+}
+.modal__close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.modal__close-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.modal__footer {
+  margin: 20px auto 32px 32px;
+  padding: 0;
+  gap: 12px;
+}
+.modal__caption {
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  line-height: 24px;
+}
+.modal__weather {
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  line-height: 24px;
 }

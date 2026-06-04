@@ -19,6 +19,7 @@
   margin: 0 20px 0 auto;
   border: none;
   gap: 12px;
+  cursor: pointer;
 
   font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
   font-weight: 700;
@@ -36,6 +37,7 @@
   font-weight: 700;
   font-style: Bold;
   font-size: 20px;
+  cursor: pointer;
 }
 .header__avatar {
   height: 40px;

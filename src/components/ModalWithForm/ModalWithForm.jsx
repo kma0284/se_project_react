@@ -1,5 +1,5 @@
 import "./ModalWithForm.css";
-
+import closeIcon from "../../assets/closeIconDark.svg";
 function ModalWithForm({
   children,
   buttonText,
@@ -29,7 +29,12 @@ function ModalWithForm({
         <h2 className="modal__title">{title}</h2>
 
         <button onClick={onClose} type="button" className="modal__close">
-          CLOSE
+          <img
+            src={closeIcon}
+            alt=""
+            className="modal__close-icon"
+            aria-label="Close modal"
+          />
         </button>
 
         <form className="modal__form" onSubmit={handleSubmit}>

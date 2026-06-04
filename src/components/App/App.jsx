@@ -31,6 +31,14 @@ function App() {
     setActiveModal("");
     resetForm();
   };
+  const [username, setUsername] = useState(() => {
+    return localStorage.getItem("username") || "Name";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("username", username);
+  }, [username]);
+
   const [selectedCard, setSelectedCard] = useState({});
   const handleCardClick = (card) => {
     setSelectedCard(card);
@@ -49,7 +57,12 @@ function App() {
   return (
     <div className="page">
       <div className="page__content">
-        <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+        <Header
+          handleAddClick={handleAddClick}
+          weatherData={weatherData}
+          username={username}
+          setUsername={setUsername}
+        />
         <Main
           weatherData={weatherData}
           handleCardClick={handleCardClick}
@@ -140,8 +153,6 @@ function App() {
         card={selectedCard}
         onClose={closeActiveModal}
       />
-
-      {/* <ItemCard key={card._id} item={card} /> */}
     </div>
   );
 }

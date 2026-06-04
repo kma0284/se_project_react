@@ -1,4 +1,5 @@
 import "./ItemModal.css";
+import closeIcon from "../../assets/closeIcon.svg";
 function ItemModal({ activeModal, onClose, card }) {
   if (!card) return null;
   return (
@@ -6,17 +7,20 @@ function ItemModal({ activeModal, onClose, card }) {
       className={`modal ${activeModal === "preview" ? "modal__opened" : ""}`}
     >
       <div className="modal__content_type_image">
-        <button onClick={onClose} type="button" className="modal__close">
-          CLOSE
+        <button
+          onClick={onClose}
+          type="button"
+          className="modal__close"
+          aria-label="Close modal"
+        >
+          <img src={closeIcon} alt="" className="modal__close-icon" />
         </button>
-
         <img src={card.link} alt={card.name} className="modal__image" />
-
         <div className="modal__footer">
           <h2 className="modal__caption">{card.name}</h2>
-        </div>
 
-        <p className="modal__weather">weather: {card.weather}</p>
+          <p className="modal__weather">Weather: {card.weather}</p>
+        </div>{" "}
       </div>
     </div>
   );
