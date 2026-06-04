@@ -86,6 +86,7 @@ function App() {
         <Footer />
       </div>
       <ModalWithForm
+        name="add-garment"
         title="New garment"
         buttonText="Add garment"
         activeModal={activeModal}

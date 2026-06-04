@@ -1,5 +1,6 @@
 import "./ModalWithForm.css";
 import closeIcon from "../../assets/closeIconDark.svg";
+
 function ModalWithForm({
   children,
   buttonText,
@@ -7,6 +8,7 @@ function ModalWithForm({
   activeModal,
   onClose,
   isValid,
+  name,
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,6 +19,7 @@ function ModalWithForm({
   };
 
   const isOpen = activeModal === name;
+
   return (
     <div
       className={`modal modal_type_${name} ${isOpen ? "modal__opened" : ""}`}
@@ -33,6 +36,7 @@ function ModalWithForm({
         >
           <img src={closeIcon} alt="" className="modal__close-icon" />
         </button>
+
         <form className="modal__form" onSubmit={handleSubmit}>
           {children}
 
@@ -43,11 +47,12 @@ function ModalWithForm({
             }`}
             disabled={!isValid}
           >
-            Add garment
+            {buttonText}
           </button>
         </form>
       </div>
     </div>
   );
 }
+
 export default ModalWithForm;
