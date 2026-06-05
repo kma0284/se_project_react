@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+
 import { useForm } from "../../hooks/useForm.js";
 import "./App.css";
 import { APIkey } from "../../utils/constants.js";
@@ -96,7 +98,7 @@ function App() {
         isValid={isValid}
         handleChange={handleChange}
       >
-        <label htmlFor="Name" className="modal__label" id="name__label">
+        <label htmlFor="name__label" className="modal__label">
           Name{" "}
           <input
             type="text"
@@ -109,7 +111,7 @@ function App() {
             required
           />
         </label>
-        <label htmlFor="ImageURl" className="modal__label" id="url__label">
+        <label htmlFor="url__label" className="modal__label">
           Image{" "}
           <input
             type="text"
@@ -126,7 +128,6 @@ function App() {
           <legend className="modal__legend">Select the weather type:</legend>
           <label
             htmlFor="hot"
-            id="hot"
             className={`modal__label modal__label_type_radio ${
               values.weather === "hot" ? "modal__label_active" : ""
             }`}
@@ -143,7 +144,6 @@ function App() {
           </label>
           <label
             htmlFor="warm"
-            id="warm"
             className={`modal__label modal__label_type_radio ${
               values.weather === "warm" ? "modal__label_active" : ""
             }`}
@@ -160,7 +160,6 @@ function App() {
           </label>
           <label
             htmlFor="cold"
-            id="cold"
             className={`modal__label modal__label_type_radio ${
               values.weather === "cold" ? "modal__label_active" : ""
             }`}

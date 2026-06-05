@@ -13,7 +13,7 @@ function ItemModal({ activeModal, onClose, card }) {
           className="modal__close"
           aria-label="Close modal"
         >
-          <img src={closeIcon} alt="" className="modal__close-icon" />
+          <img src={closeIcon} alt="close icon" className="modal__close-icon" />
         </button>
         <img src={card.link} alt={card.name} className="modal__image" />
         <div className="modal__footer">

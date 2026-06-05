@@ -103,9 +103,12 @@
   font-size: 16px;
   line-height: 20px;
   padding: 8px 16px;
-
-  border-radius: 4px;
+  max-height: 36px;
+  border-radius: 8px;
   transition: opacity 0.2s ease;
+  background: #0000004d;
+  text-align: center;
+  gap: 8px;
 }
 
 .modal__submit_disabled {
