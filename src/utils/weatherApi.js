@@ -44,9 +44,15 @@ export const isDay = ({ sunrise, sunset }, now) => {
 };
 
 export const filterWeatherData = (data) => {
+  const tempF = Math.round(data.main.temp);
+  const tempC = Math.round((tempF - 32) * (5 / 9));
+
   return {
     city: data.name,
-    temp: { f: Math.round(data.main.temp) },
+    temp: {
+      F: tempF,
+      C: tempC,
+    },
     type: getWeatherCondition(data.main.temp),
     condition: data.weather?.[0]?.main?.toLowerCase() || "unknown",
     isDay: isDay(data.sys, Date.now()),

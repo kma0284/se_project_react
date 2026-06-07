@@ -1,7 +1,7 @@
 import "./WeatherCard.css";
 import { weatherOptions } from "../../utils/constants";
 
-export function WeatherCard({ weatherData }) {
+export function WeatherCard({ weatherData, currentTemperatureUnit }) {
   const weatherOption = weatherOptions.find((option) => {
     return (
       option.day === weatherData.isDay &&
@@ -13,7 +13,9 @@ export function WeatherCard({ weatherData }) {
 
   return (
     <section className="weather-card">
-      <p className="weather-card__temp">{weatherData.temp.f}°F</p>
+      <p className="weather-card__temp">
+        {weatherData.temp[currentTemperatureUnit]}°{currentTemperatureUnit}
+      </p>
 
       <img
         src={weatherOption?.url || fallbackUrl}

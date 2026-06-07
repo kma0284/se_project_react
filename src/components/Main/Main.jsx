@@ -2,10 +2,19 @@ import "./Main.css";
 import { WeatherCard } from "../WeatherCard/WeatherCard.jsx";
 import ItemCard from "../ItemCard/ItemCard.jsx";
 
-function Main({ weatherData, handleCardClick, clothingItems }) {
+function Main({
+  weatherData,
+  handleCardClick,
+  clothingItems,
+  currentTemperatureUnit,
+  handleToggleSwitchChange,
+}) {
   return (
     <main className="main">
-      <WeatherCard weatherData={weatherData} />
+      <WeatherCard
+        weatherData={weatherData}
+        currentTemperatureUnit={currentTemperatureUnit}
+      />
 
       <section className="cards">
         <p className="cards__text">

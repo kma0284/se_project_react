@@ -14,6 +14,8 @@ import { ItemCard } from "../ItemCard/ItemCard.jsx";
 import { filterWeatherData, getWeather } from "../../utils/weatherApi.js";
 import { getCurrentCoordinates } from "../../utils/weatherApi.js";
 import { defaultClothingItems } from "../../utils/constants.js";
+import Profile from "../Profile/Profile.jsx";
+import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 
 function App() {
   const { values, errors, isValid, handleChange, resetForm } = useForm({
@@ -53,11 +55,39 @@ function App() {
     setActiveModal("preview");
   };
 
+  //set f or c
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const handleToggleSwitchChange = () => {
+    setCurrentTemperatureUnit((prev) => (prev === "F" ? "C" : "F"));
+  };
+  //add item modal
+  const handleAddItem = (values, resetAndClose) => {
+    const newItem = {
+      name: values.name,
+      imageUrl: values.imageUrl,
+      weather: values.weather,
+      _id: crypto.randomUUID(), // temporary until API
+    };
+
+    setClothingItems([newItem, ...clothingItems]);
+
+    resetAndClose(); // ONLY after success
+  };
+  //delete item
+  const handleDeleteItem = (item) => {
+    deleteItem(item._id)
+      .then(() => {
+        setClothingItems((items) => items.filter((i) => i._id !== item._id));
+        setActiveModal("");
+      })
+      .catch(console.error);
+  };
+  //coordinates
+
   const DEFAULT_COORDS = {
     latitude: 28.5383,
     longitude: -81.3792,
   };
-
   useEffect(() => {
     getCurrentCoordinates()
       .catch(() => {
@@ -78,13 +108,35 @@ function App() {
           weatherData={weatherData}
           username={username}
           setUsername={setUsername}
+          currentTemperatureUnit={currentTemperatureUnit}
+          handleToggleSwitchChange={handleToggleSwitchChange}
         />
-        <Main
-          weatherData={weatherData}
-          handleCardClick={handleCardClick}
-          setActiveModal={setActiveModal}
-          clothingItems={clothingItems}
-        />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Main
+                weatherData={weatherData}
+                handleCardClick={handleCardClick}
+                setActiveModal={setActiveModal}
+                clothingItems={clothingItems}
+                currentTemperatureUnit={currentTemperatureUnit}
+              />
+            }
+          />
+
+          <Route
+            path="/profile"
+            element={
+              <Profile
+                username={username}
+                clothingItems={clothingItems}
+                handleCardClick={handleCardClick}
+                handleAddClick={handleAddClick}
+              />
+            }
+          />
+        </Routes>
         <Footer />
       </div>
       <ModalWithForm
@@ -176,10 +228,19 @@ function App() {
           </label>
         </fieldset>
       </ModalWithForm>
-
+      <AddItemModal
+        activeModal={activeModal}
+        onAddItem={handleAddItem}
+        onCloseModal={closeActiveModal}
+        values={values}
+        handleChange={handleChange}
+        isValid={isValid}
+        errors={errors}
+      />
       <ItemModal
         activeModal={activeModal}
         card={selectedCard}
+        onDelete={handleDeleteItem}
         onClose={closeActiveModal}
       />
     </div>

@@ -1,6 +1,6 @@
 import "./ItemModal.css";
 import closeIcon from "../../assets/closeIcon.svg";
-function ItemModal({ activeModal, onClose, card }) {
+function ItemModal({ activeModal, onClose, card, handleDelete }) {
   if (!card) return null;
   return (
     <div
@@ -21,6 +21,9 @@ function ItemModal({ activeModal, onClose, card }) {
 
           <p className="modal__weather">Weather: {card.weather}</p>
         </div>{" "}
+        <button className="modal__delete-btn" onClick={handleDelete}>
+          Delete
+        </button>
       </div>
     </div>
   );
