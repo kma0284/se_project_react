@@ -1,0 +1,79 @@
+.switch {
+  position: relative;
+  width: 60px;
+  height: 28px;
+  border-radius: 20px;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  overflow: hidden;
+}
+
+/* hide checkbox */
+.switch input {
+  display: none;
+}
+
+/* labels */
+.switch__text {
+  position: absolute;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 1;
+  pointer-events: none;
+  color: #666;
+}
+
+.switch__text_f {
+  left: 10px;
+}
+
+.switch__text_c {
+  right: 10px;
+}
+*/ slider knob .slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* when checked → move knob to right */
+.switch input:checked ~ .slider {
+  transform: translateX(32px);
+}
+
+/* active text styling */
+.switch input:checked ~ .switch__text_f {
+  color: #aaa;
+}
+
+.switch input:not(:checked) ~ .switch__text_c {
+  color: #aaa;
+}
+
+/* active state highlight */
+.switch input:checked ~ .switch__text_c {
+  color: black;
+}
+
+.switch input:not(:checked) ~ .switch__text_f {
+  color: black;
+}
+.slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 28px;
+  height: 24px;
+  background: white;
+  border-radius: 20px;
+  transition: transform 0.3s ease;
+  z-index: 0;
+}

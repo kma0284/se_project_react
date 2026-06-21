@@ -1,18 +1,25 @@
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
+import { useForm } from "../../hooks/useForm";
 
-function AddItemModal({
-  isOpen,
-  onAddItem,
-  onCloseModal,
-  values,
-  handleChange,
-  handleSubmit,
-  isValid,
-  errors,
-}) {
+function AddItemModal({ onAddItem, onClose }) {
+  const { values, handleChange, resetForm, isValid } = useForm({
+    name: "",
+    imageUrl: "",
+    weather: "",
+  });
+
   const onSubmit = (e) => {
     e.preventDefault();
-    onAddItem(values, onCloseModal); // pass reset/close flow
+
+    onAddItem({
+      name: values.name,
+      imageUrl: values.imageUrl,
+      weather: values.weather,
+      _id: crypto.randomUUID(),
+    });
+
+    resetForm();
+    onClose();
   };
 
   return (
@@ -20,69 +27,51 @@ function AddItemModal({
       name="add-garment"
       title="New garment"
       buttonText="Add garment"
-      isOpen={isOpen}
-      onClose={onCloseModal}
+      onClose={onClose}
       onSubmit={onSubmit}
       isValid={isValid}
     >
+      <input name="name" value={values.name} onChange={handleChange} required />
+
+      <input
+        name="imageUrl"
+        value={values.imageUrl}
+        onChange={handleChange}
+        required
+      />
+
       <label>
-        Name
         <input
-          type="text"
-          name="name"
-          value={values.name}
+          type="radio"
+          name="weather"
+          value="hot"
+          checked={values.weather === "hot"}
           onChange={handleChange}
-          required
         />
+        Hot
       </label>
 
       <label>
-        Image URL
         <input
-          type="url"
-          name="imageUrl"
-          value={values.imageUrl}
+          type="radio"
+          name="weather"
+          value="warm"
+          checked={values.weather === "warm"}
           onChange={handleChange}
-          required
         />
+        Warm
       </label>
 
-      <fieldset>
-        <legend>Weather type</legend>
-
-        <label>
-          <input
-            type="radio"
-            name="weather"
-            value="hot"
-            onChange={handleChange}
-            checked={values.weather === "hot"}
-          />
-          Hot
-        </label>
-
-        <label>
-          <input
-            type="radio"
-            name="weather"
-            value="warm"
-            onChange={handleChange}
-            checked={values.weather === "warm"}
-          />
-          Warm
-        </label>
-
-        <label>
-          <input
-            type="radio"
-            name="weather"
-            value="cold"
-            onChange={handleChange}
-            checked={values.weather === "cold"}
-          />
-          Cold
-        </label>
-      </fieldset>
+      <label>
+        <input
+          type="radio"
+          name="weather"
+          value="cold"
+          checked={values.weather === "cold"}
+          onChange={handleChange}
+        />
+        Cold
+      </label>
     </ModalWithForm>
   );
 }

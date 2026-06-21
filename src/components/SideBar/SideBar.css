@@ -1,0 +1,20 @@
+.profile {
+  transform: translateX(0);
+  animation: slideIn 0.3s forwards;
+}
+.edit__user {
+  display: flex;
+  flex-direction: row;
+}
+.edit__user {
+  display: flex;
+  flex-direction: column;
+}
+.sidebar__username {
+}
+.edit__userName {
+}
+.sidebar__avatar {
+  width: 56px;
+  height: 56px;
+}

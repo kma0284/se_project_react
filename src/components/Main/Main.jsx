@@ -1,13 +1,12 @@
 import "./Main.css";
-import { WeatherCard } from "../WeatherCard/WeatherCard.jsx";
-import ItemCard from "../ItemCard/ItemCard.jsx";
+import WeatherCard from "../WeatherCard/WeatherCard.jsx";
+import ClothesSection from "../ClothesSection/clothesSection.jsx";
 
-function Main({
+export default function Main({
   weatherData,
-  handleCardClick,
   clothingItems,
+  onCardClick,
   currentTemperatureUnit,
-  handleToggleSwitchChange,
 }) {
   return (
     <main className="main">
@@ -16,25 +15,11 @@ function Main({
         currentTemperatureUnit={currentTemperatureUnit}
       />
 
-      <section className="cards">
-        <p className="cards__text">
-          Today is {weatherData.temp.f}° / You may want to wear:
-        </p>
-
-        <ul className="cards__list">
-          {clothingItems
-            .filter((item) => item.weather === weatherData.type)
-            .map((item) => (
-              <ItemCard
-                key={item._id}
-                item={item}
-                handleCardClick={handleCardClick}
-              />
-            ))}
-        </ul>
-      </section>
+      <ClothesSection
+        items={clothingItems}
+        weatherData={weatherData}
+        onCardClick={onCardClick}
+      />
     </main>
   );
 }
-
-export default Main;

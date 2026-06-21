@@ -1,17 +1,16 @@
-import SideBar from "../SidBar/SideBar.jsx";
+import SideBar from "../SideBar/SideBar.jsx";
 import ClothesSection from "../ClothesSection/ClothesSection";
-
-function Profile(props) {
+import "./Profile.css";
+function Profile({ username, setUsername, onClose, onEdit }) {
   return (
-    <div className="profile">
-      <SideBar username={props.username} />
-
-      <ClothesSection
-        clothingItems={props.clothingItems}
-        handleCardClick={props.handleCardClick}
-        handleAddClick={props.handleAddClick}
+    <section className="profile" onClick={(e) => e.stopPropagation()}>
+      <SideBar
+        username={username}
+        setUsername={setUsername}
+        onClose={onClose}
+        onEdit={onEdit}
       />
-    </div>
+    </section>
   );
 }
 

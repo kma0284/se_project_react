@@ -8,31 +8,31 @@ export function Header({
   handleAddClick,
   weatherData,
   username,
-  setUsername,
   currentTemperatureUnit,
   handleToggleSwitchChange,
+  onAvatarClick,
 }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
-  const handleEditName = () => {
-    const newName = prompt("Enter your name:", username);
 
-    if (newName?.trim()) {
-      setUsername(newName.trim());
-    }
-  };
   return (
     <header className="header">
-      <img src={logo} alt="header logo" className="header__logo" />
+      <Link to="/">
+        <img src={logo} alt="header logo" className="header__logo" />
+      </Link>
+
       <p className="header__date-and-location">
-        {currentDate}, {weatherData.city}
+        {currentDate}, {weatherData?.city || "Loading..."}
       </p>
+
       <ToggleSwitch
+        className="temp__toggle-btn"
         currentTemperatureUnit={currentTemperatureUnit}
         handleToggleSwitchChange={handleToggleSwitchChange}
       />
+
       <button
         onClick={handleAddClick}
         type="button"
@@ -40,16 +40,19 @@ export function Header({
       >
         + Add clothes
       </button>
-      <div className="header__user-container">
-        <Link to="/profile">
-          <p className="header__username" onClick={handleEditName}>
-            {username}
-          </p>
-        </Link>
 
-        <img src={avatar} alt="avatar image" className="header__avatar" />
+      <div className="header__user-container">
+        <p className="header__username">{username}</p>
+
+        <img
+          src={avatar}
+          alt="avatar image"
+          className="header__avatar"
+          onClick={onAvatarClick}
+        />
       </div>
     </header>
   );
 }
+
 export default Header;

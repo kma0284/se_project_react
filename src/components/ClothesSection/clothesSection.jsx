@@ -1,31 +1,26 @@
-import { ItemCard } from "../ItemCard/ItemCard";
+import ItemCard from "../ItemCard/ItemCard";
+import "./ClothesSection.css";
 
-function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
+export default function ClothesSection({ items, weatherData, onCardClick }) {
+  if (!weatherData?.type) return null;
+
+  const filteredItems = items.filter(
+    (item) => item.weather === weatherData.type,
+  );
+
   return (
     <section className="clothes-section">
-      <div className="clothes-section__header">
-        <p>Your items</p>
+      <h2>Recommended for you</h2>
 
-        <button
-          type="button"
-          onClick={handleAddClick}
-          className="clothes-section__add-btn"
-        >
-          + Add New
-        </button>
-      </div>
-
-      <ul className="cards__list">
-        {clothingItems.map((item) => (
-          <ItemCard
-            key={item._id}
-            item={item}
-            handleCardClick={handleCardClick}
-          />
-        ))}
-      </ul>
+      {filteredItems.length === 0 ? (
+        <p>No items for this weather yet.</p>
+      ) : (
+        <ul className="cards__list">
+          {filteredItems.map((item) => (
+            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+          ))}
+        </ul>
+      )}
     </section>
   );
 }
-
-export default ClothesSection;

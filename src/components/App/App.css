@@ -1,11 +1,34 @@
-.page {
-  background-color: #f3f3f3;
-  padding: 0 40px;
+.app {
   max-width: 1440px;
-}
-.page__content {
-  max-width: 1360px;
   margin: 0 auto;
-  gap: 28px;
-  padding: 0;
+  padding: 0 40px 0 40px;
+}
+.app-layout {
+  display: flex;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+.main {
+  flex: 1;
+  min-width: 0;
+}
+.app-layout.sidebar-open .cards__list {
+  grid-template-columns: repeat(3, 1fr);
+}
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+.app-layout:not(.sidebar-open) .sidebar {
+  width: 0;
+}
+
+.sidebar-open .profile {
+  width: 260px;
 }

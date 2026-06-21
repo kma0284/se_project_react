@@ -1,5 +1,15 @@
 export const getCurrentCoordinates = () => {
-  return new Promise((resolve, reject) => {
+  const fallback = {
+    latitude: 28.5383, // Orlando
+    longitude: -81.3792,
+  };
+
+  return new Promise((resolve) => {
+    if (!navigator.geolocation) {
+      resolve(fallback);
+      return;
+    }
+
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
         resolve({
@@ -7,7 +17,9 @@ export const getCurrentCoordinates = () => {
           longitude: coords.longitude,
         });
       },
-      reject,
+      () => {
+        resolve(fallback);
+      },
       {
         enableHighAccuracy: true,
         timeout: 10000,
@@ -21,26 +33,19 @@ export const getWeather = ({ latitude, longitude }, APIkey) => {
   return fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`,
   ).then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return Promise.reject(`Error: ${res.status}`);
-    }
+    if (res.ok) return res.json();
+    return Promise.reject(`Error: ${res.status}`);
   });
 };
 
-export function getWeatherCondition(temp) {
-  if (temp >= 86) return "hot";
-  if (temp >= 66) return "warm";
+export function getWeatherCondition(tempF) {
+  if (tempF >= 86) return "hot";
+  if (tempF >= 66) return "warm";
   return "cold";
 }
 
-export const isDay = ({ sunrise, sunset }, now) => {
-  const current = now;
-  const sunriseMs = sunrise * 1000;
-  const sunsetMs = sunset * 1000;
-
-  return current > sunriseMs && current < sunsetMs;
+export const isDay = (sys, now = Date.now()) => {
+  return now > sys.sunrise * 1000 && now < sys.sunset * 1000;
 };
 
 export const filterWeatherData = (data) => {
@@ -50,11 +55,11 @@ export const filterWeatherData = (data) => {
   return {
     city: data.name,
     temp: {
-      F: tempF,
-      C: tempC,
+      f: tempF,
+      c: tempC,
     },
-    type: getWeatherCondition(data.main.temp),
+    type: getWeatherCondition(tempF),
     condition: data.weather?.[0]?.main?.toLowerCase() || "unknown",
-    isDay: isDay(data.sys, Date.now()),
+    isDay: isDay(data.sys),
   };
 };

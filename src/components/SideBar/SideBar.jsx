@@ -1,0 +1,28 @@
+import "./SideBar.css";
+
+function SideBar({ username, onClose, onEdit }) {
+  return (
+    <div className="sidebar">
+      <div className="user">
+        <img
+          className="sidebar__avatar"
+          src="https://practicum-content.s3.us-west-1.amazonaws.com/frontend-developer/common/avatar.jpg"
+          alt="avatar"
+        />
+
+        <p className="sidebar__username">{username}</p>
+      </div>
+
+      <div className="edit__user">
+        <button onClick={onEdit} className="edit__userName">
+          Edit Name
+        </button>
+
+        <button onClick={onClose} className="close__btn">
+          Close
+        </button>
+      </div>
+    </div>
+  );
+}
+export default SideBar;

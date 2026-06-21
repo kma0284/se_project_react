@@ -1,0 +1,32 @@
+.clothes-section {
+  flex-direction: column;
+  display: block;
+  width: 100%;
+  max-width: 1360px;
+}
+.cards__list {
+  display: grid;
+  gap: 20px;
+
+  grid-template-columns: repeat(4, 1fr);
+  transition: all 0.3s ease;
+
+  width: 100%;
+}
+/* @media (max-width: 1200px) {
+  .cards__list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .cards__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .cards__list {
+    grid-template-columns: 1fr;
+  }
+} */
