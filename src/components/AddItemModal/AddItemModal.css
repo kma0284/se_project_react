@@ -1,0 +1,91 @@
+/* ── Field wrapper ── */
+.modal__field {
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.modal__input-labels {
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 16px; gap: 24px;
+}
+
+.modal__label {
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  color: #000;
+  margin: 0;
+}
+
+/* ── Text inputs ── */
+.modal__input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #000;
+  box-sizing: border-box;
+  outline: none;
+  margin: 8px 0 24px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.modal__input:focus {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.modal__input::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  color: #999;
+}
+
+/* ── Radio buttons (weather type) ── */
+.modal__radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.modal__radio-buttons {
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.modal__radio-label {
+  color: #999;
+  cursor: pointer;
+}
+
+.modal__radio-label_active {
+  color: #000;
+  font-weight: 500;
+}
+
+.modal__label_type_radio {
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal__label_type_radio:hover {
+  color: rgba(0, 0, 0, 0.85);
+}

@@ -1,72 +1,44 @@
 import { useState } from "react";
-
+ 
 export function useForm(initialValues = {}) {
   const [values, setValues] = useState(initialValues);
-  const [errors, setErrors] = useState({});
-  const [isValid, setIsValid] = useState(false);
-
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    const updatedValues = {
-      ...values,
-      [name]: value,
-    };
-
-    setValues(updatedValues);
-
-    let error = "";
-
-    if (!value.trim()) {
-      error = "Required field";
-    }
-
-    if (name === "imageUrl" && value) {
-      if (!isValidUrl(value)) {
-        error = "Enter a valid URL";
-      } else if (!value.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
-        error = "URL must be an image (jpg, png, gif, webp)";
-      }
-    }
-
-    const updatedErrors = {
-      ...errors,
-      [name]: error,
-    };
-
-    setErrors(updatedErrors);
-
-    const hasErrors = Object.values(updatedErrors).some((err) => err !== "");
-
-    const allFieldsFilled =
-      updatedValues.name.trim() &&
-      updatedValues.imageUrl.trim() &&
-      updatedValues.weather.trim();
-
-    setIsValid(!hasErrors && allFieldsFilled);
+    setValues((prev) => ({ ...prev, [name]: value }));
   };
-
-  const resetForm = () => {
-    setValues(initialValues);
-    setErrors({});
-    setIsValid(false);
-  };
-  function isValidUrl(value) {
+ 
+  // Computed synchronously on every render — never stale
+  const errors = {};
+ 
+  if (!values.name?.trim()) errors.name = "Required field";
+  if (!values.imageUrl?.trim()) {
+    errors.imageUrl = "Required field";
+  } else {
     try {
-      new URL(value);
-      return true;
+      new URL(values.imageUrl);
+      if (!values.imageUrl.match(/\.(jpg|jpeg|png|gif|webp)(\?|#|$)/i)) {
+        errors.imageUrl = "Must be image URL";
+      }
     } catch {
-      return false;
+      errors.imageUrl = "Enter a valid URL";
     }
   }
-
+  if (!values.weather) errors.weather = "Required field";
+ 
+  const isValid = Object.keys(errors).length === 0;
+ 
+  const resetForm = () => {
+    setValues(initialValues);
+  };
+ 
   return {
     values,
     errors,
     isValid,
     handleChange,
     setValues,
-    setErrors,
     resetForm,
   };
 }
+ 

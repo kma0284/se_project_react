@@ -1,32 +1,90 @@
-.clothes-section {
-  flex-direction: column;
-  display: block;
-  width: 100%;
-  max-width: 1360px;
-}
+
+
 .cards__list {
   display: grid;
-  gap: 20px;
-
   grid-template-columns: repeat(4, 1fr);
-  transition: all 0.3s ease;
-
-  width: 100%;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-/* @media (max-width: 1200px) {
+
+/* Sidebar open — 3 columns */
+.sidebar-open .cards__list {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Medium screens */
+@media (max-width: 900px) {
   .cards__list {
     grid-template-columns: repeat(3, 1fr);
   }
-}
 
-@media (max-width: 900px) {
-  .cards__list {
+  .sidebar-open .cards__list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
+/* Small screens */
 @media (max-width: 600px) {
+  .cards__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sidebar-open .cards__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Very small screens */
+@media (max-width: 380px) {
   .cards__list {
     grid-template-columns: 1fr;
   }
-} */
+}
+
+.clothes-section__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.clothes-section__header h2 {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.clothes-section__title {
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
+font-weight: 700;
+font-style: Bold;
+font-size: 20px;
+
+  margin-bottom: 34px;
+}
+
+.clothes-section__add-btn {
+  background: none;
+   border: none; 
+  padding: 5px 12px;
+  font-size: 20px;
+  cursor: pointer;
+  color:  #00000099;
+;
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
+font-weight: 700;
+font-style: Bold;
+font-size: 20px;
+line-height: 100%;
+
+}
+
+.clothes-section__add-btn:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+.clothes-section__empty {
+  color: #888;
+  font-size: 14px;
+}

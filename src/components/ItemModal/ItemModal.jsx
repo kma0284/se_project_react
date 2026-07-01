@@ -1,14 +1,25 @@
 import "./ItemModal.css";
-import closeIcon from "../../assets/closeIcon.svg";
 
-export default function ItemModal({ item, onClose }) {
+export default function ItemModal({ item, onDeleteClick }) {
   if (!item) return null;
 
   return (
-    <div className="item-modal">
-      <img src={item.link} alt={item.name} className="item-modal__image" />
+    <div className="modal__preview">
+      <img
+        className="modal__preview-image"
+        src={item.imageUrl}
+        alt={item.name}
+      />
 
-      <h2>{item.name}</h2>
+      <div className="modal__preview-footer">
+        <p className="modal__preview-name">{item.name}</p>
+
+        <button className="modal__delete-btn" onClick={onDeleteClick}>
+          Delete item
+        </button>
+      </div>
+
+      <p className="modal__weather">Weather: {item.weather}</p>
     </div>
   );
 }

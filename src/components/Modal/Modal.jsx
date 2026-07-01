@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import "./Modal.css";
 import closeIcon from "../../assets/closeIconDark.svg";
 
-export default function Modal({ isOpen, onClose, children }) {
+export default function Modal({ isOpen, onClose, children, className = "" }) {
   useEffect(() => {
     if (!isOpen) return;
 
@@ -22,7 +22,8 @@ export default function Modal({ isOpen, onClose, children }) {
 
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="modal" onClick={handleModalClick}>
+      <div className={`modal__content ${className}`} onClick={handleModalClick}>
+        {" "}
         <button
           type="button"
           className="modal__close"
@@ -31,7 +32,6 @@ export default function Modal({ isOpen, onClose, children }) {
         >
           <img src={closeIcon} alt="Close" />
         </button>
-
         {children}
       </div>
     </div>

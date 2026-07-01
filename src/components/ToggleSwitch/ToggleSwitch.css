@@ -32,13 +32,14 @@
 .switch__text_c {
   right: 10px;
 }
-*/ slider knob .slider {
+/* slider knob  */
+.slider {
   position: absolute;
   top: 2px;
   left: 2px;
   width: 24px;
   height: 24px;
-  background: white;
+  background: #000;
   border-radius: 50%;
   transition: transform 0.3s ease;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
@@ -51,20 +52,20 @@
 
 /* active text styling */
 .switch input:checked ~ .switch__text_f {
-  color: #aaa;
+  color: #FFF;
 }
 
 .switch input:not(:checked) ~ .switch__text_c {
-  color: #aaa;
+  color: #00000080;
 }
 
 /* active state highlight */
 .switch input:checked ~ .switch__text_c {
-  color: black;
+  color: #FFF;
 }
 
 .switch input:not(:checked) ~ .switch__text_f {
-  color: black;
+  color: #FFF;
 }
 .slider {
   position: absolute;
@@ -72,7 +73,7 @@
   left: 2px;
   width: 28px;
   height: 24px;
-  background: white;
+  background: #000;
   border-radius: 20px;
   transition: transform 0.3s ease;
   z-index: 0;

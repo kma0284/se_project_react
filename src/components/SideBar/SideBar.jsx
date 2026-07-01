@@ -13,7 +13,7 @@ function SideBar({ username, onClose, onEdit }) {
         <p className="sidebar__username">{username}</p>
       </div>
 
-      <div className="edit__user">
+      <div className="sideBar__actions">
         <button onClick={onEdit} className="edit__userName">
           Edit Name
         </button>

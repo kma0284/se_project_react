@@ -6,19 +6,18 @@ export default function Main({
   weatherData,
   clothingItems,
   onCardClick,
-  currentTemperatureUnit,
+  isProfileOpen,
+  onAddClick,
 }) {
   return (
     <main className="main">
-      <WeatherCard
-        weatherData={weatherData}
-        currentTemperatureUnit={currentTemperatureUnit}
-      />
-
+      {!isProfileOpen && <WeatherCard weatherData={weatherData} />}
       <ClothesSection
         items={clothingItems}
         weatherData={weatherData}
         onCardClick={onCardClick}
+        isProfileOpen={isProfileOpen}
+        onAddClick={onAddClick}
       />
     </main>
   );

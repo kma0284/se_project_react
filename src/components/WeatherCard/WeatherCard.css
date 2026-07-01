@@ -1,10 +1,11 @@
-.weather__card {
+.weather-card {
   width: 100%;
   max-width: 1360px;
-
   overflow: hidden;
   border-radius: 12px;
   display: flex;
+  position: relative;
+  margin-bottom: 40px;
 }
 .weather-card__temp {
   font-size: 36px;

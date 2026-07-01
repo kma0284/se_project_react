@@ -1,25 +1,28 @@
 import "./ModalWithForm.css";
-import Modal from "../Modal/Modal.jsx";
+// import Modal from "../Modal/Modal.jsx";
 export default function ModalWithForm({
   title,
   children,
   onSubmit,
   buttonText,
   isValid,
-  onClose,
-  isOpen,
+  
 }) {
+
   return (
-    <Modal isOpen={true} onClose={onClose}>
-      <form className="modal-form" onSubmit={onSubmit}>
-        <h2 className="modal-form__title">{title}</h2>
+    <form className="modal__form" onSubmit={onSubmit}>
+      <h2 className="modal__title">{title}</h2>
 
-        {children}
+      {children}
 
-        <button type="submit" disabled={!isValid}>
-          {buttonText}
-        </button>
-      </form>
-    </Modal>
+      <button
+        type="submit"
+        disabled={!isValid}
+        className={isValid ? "modal__submit_enabled" : "modal__submit_disabled"}
+      >
+        {buttonText}
+      </button>
+      
+    </form>
   );
 }

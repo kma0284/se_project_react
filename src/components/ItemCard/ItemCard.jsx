@@ -2,9 +2,13 @@ import "./ItemCard.css";
 
 export default function ItemCard({ item, onCardClick }) {
   return (
+    
     <li className="card" onClick={() => onCardClick(item)}>
-      <img src={item.link} alt={item.name} />
-      <h3>{item.name}</h3>
+      <div className="cards">
+      <img src={item.imageUrl} alt={item.name} />
+      <h3 className="card__name">{item.name}</h3>
+      </div>
     </li>
+    
   );
 }

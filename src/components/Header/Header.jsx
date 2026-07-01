@@ -49,6 +49,7 @@ export function Header({
           alt="avatar image"
           className="header__avatar"
           onClick={onAvatarClick}
+          
         />
       </div>
     </header>

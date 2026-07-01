@@ -5,20 +5,20 @@ export default function ConfirmDeleteModal({ item, onConfirm, onClose }) {
 
   return (
     <div className="confirm-delete">
-      <h2>Are you sure?</h2>
-
-      <p>
-        This will permanently delete <strong>{item.name}</strong>
-      </p>
+      <h2 className="confirm-delete__title">
+        <span>Are you sure you want to delete {item.name}?</span>
+        <span>This action is irreversible.</span>
+      </h2>
 
       <div className="confirm-delete__buttons">
-        <button onClick={onClose}>Cancel</button>
-
         <button
           onClick={() => onConfirm(item)}
           className="confirm-delete__danger"
         >
-          Yes, delete
+          Yes, delete item
+        </button>
+        <button className="confirm-delete__cancel" onClick={onClose}>
+          Cancel
         </button>
       </div>
     </div>

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
-import { useForm } from "../../hooks/useForm.js";
+import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 
@@ -15,43 +14,26 @@ import Modal from "../Modal/Modal.jsx";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
-import WeatherCard from "../WeatherCard/WeatherCard.jsx";
-import Profile from "../Profile/Profile.jsx";
 import ProfileModal from "../ProfileModal/ProfileModal.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
+import ItemModal from "../ItemModal/ItemModal.jsx";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
-
-import ClothesSection from "../ClothesSection/clothesSection.jsx";
-import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import SideBar from "../SideBar/SideBar.jsx";
 
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+
+const MODAL = {
+  EDIT_PROFILE: "edit_profile",
+  PREVIEW: "preview",
+  ADD: "add",
+  DELETE: "delete",
+};
+
 function App() {
-  const MODAL = {
-    // PROFILE: "profile",
-    EDIT_PROFILE: "edit-profile",
-    PREVIEW: "preview",
-    ADD: "add",
-    DELETE: "delete",
-  };
-
-  const location = useLocation();
-  const isProfilePage = location.pathname === "/profile";
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-  // const openProfile = () => setIsProfileOpen(true);
-  const closeProfile = () => setIsProfileOpen(false);
-  const openProfile = () => {
-    setActiveModal(null);
-    setIsProfileOpen(true);
-  };
-  const { resetForm } = useForm({
-    name: "",
-    imageUrl: "",
-    weather: "",
-  });
-
   // ---------------- STATE ----------------
   const [activeModal, setActiveModal] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const [clothingItems, setClothingItems] = useState([]);
   const [weatherData, setWeatherData] = useState({
@@ -60,22 +42,13 @@ function App() {
     city: "",
   });
 
-  const [user] = useState({ name: "Guest", location: "" });
-
-  const [username, setUsername] = useState(() => {
-    return localStorage.getItem("username") || "Name";
-  });
+  const [username, setUsername] = useState(
+    () => localStorage.getItem("username") || "Name",
+  );
 
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("f");
 
   // ---------------- EFFECTS ----------------
-  useEffect(() => {
-    console.log("selectedCard:", selectedCard);
-  }, [selectedCard]);
-
-  useEffect(() => {
-    console.log("activeModal changed:", activeModal);
-  }, [activeModal]);
   useEffect(() => {
     setClothingItems(defaultClothingItems);
   }, []);
@@ -85,10 +58,7 @@ function App() {
   }, [username]);
 
   useEffect(() => {
-    const DEFAULT_COORDS = {
-      latitude: 28.5383,
-      longitude: -81.3792,
-    };
+    const DEFAULT_COORDS = { latitude: 28.5383, longitude: -81.3792 };
 
     getCurrentCoordinates()
       .catch(() => DEFAULT_COORDS)
@@ -102,24 +72,22 @@ function App() {
     setIsProfileOpen(false);
     setActiveModal(type);
   };
+
   const closeModal = () => {
     setActiveModal(null);
-    // setSelectedCard(null);
-    resetForm();
   };
-
-  // ----------------  HANDLING ----------------
+  const handleEditProfile = () => {
+    setActiveModal((current) =>
+      current === MODAL.EDIT_PROFILE ? null : MODAL.EDIT_PROFILE,
+    );
+  };
+  // ---------------- HANDLERS ----------------
   const handleCardClick = (card) => {
     setIsProfileOpen(false);
     setSelectedCard(card);
     setActiveModal(MODAL.PREVIEW);
   };
-  const handleAvatarClick = () => {
-    setSelectedCard(null);
-    setActiveModal(MODAL.PROFILE);
-  };
 
-  // ---------------- ADD ITEM ----------------
   const handleAddItem = (item) => {
     setClothingItems((prev) => [
       { ...item, _id: crypto.randomUUID() },
@@ -128,45 +96,38 @@ function App() {
     closeModal();
   };
 
-  // ---------------- DELETE ITEM ----------------
   const handleDeleteItem = (item) => {
     setClothingItems((prev) => prev.filter((i) => i._id !== item._id));
     setSelectedCard(null);
     closeModal();
   };
 
-  // ---------------- TEMP TOGGLE ----------------
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prev) => (prev === "f" ? "c" : "f"));
   };
 
+  // ---------------- RENDER ----------------
   return (
     <CurrentTemperatureUnitContext.Provider
-      value={{
-        currentTemperatureUnit,
-        handleToggleSwitchChange,
-      }}
+      value={{ currentTemperatureUnit, handleToggleSwitchChange }}
     >
       <Header
-        user={user}
         weatherData={weatherData}
         username={username}
         setUsername={setUsername}
-        currentTemperatureUnit={currentTemperatureUnit}
-        handleToggleSwitchChange={handleToggleSwitchChange}
         handleAddClick={() => openModal(MODAL.ADD)}
-        onAvatarClick={() => setIsProfileOpen(true)}
+        onAvatarClick={() => setIsProfileOpen((open) => !open)}
       />
+
       <div className={`app-layout ${isProfileOpen ? "sidebar-open" : ""}`}>
         <div className="main-content">
-          {/* PROFILE */}
-
-          <SideBar
-            username={username}
-            setUsername={setUsername}
-            onClose={closeProfile}
-            onEdit={() => setActiveModal(MODAL.EDIT_PROFILE)}
-          />
+          {isProfileOpen && (
+            <SideBar
+              username={username}
+              onClose={() => setIsProfileOpen(false)}
+              onEdit={handleEditProfile}
+            />
+          )}
 
           <Routes>
             <Route
@@ -176,35 +137,29 @@ function App() {
                   weatherData={weatherData}
                   clothingItems={clothingItems}
                   onCardClick={handleCardClick}
-                  currentTemperatureUnit={currentTemperatureUnit}
-                  items={clothingItems}
+                  isProfileOpen={isProfileOpen}
+                  onAddClick={() => openModal(MODAL.ADD)}
                 />
               }
             />
           </Routes>
         </div>
-        {/*  SINGLE MODAL SYSTEM */}
+
+        {/* SINGLE MODAL SYSTEM */}
         <Modal
-          isOpen={activeModal !== null && activeModal !== MODAL.PROFILE}
+          isOpen={activeModal !== null}
           onClose={closeModal}
+          className={
+            activeModal === MODAL.DELETE ? "modal__content_type_confirm" : ""
+          }
         >
           {" "}
-          {activeModal === MODAL.PREVIEW ? (
-            selectedCard ? (
-              <div>
-                <img src={selectedCard.link} alt={selectedCard.name} />
-                <h2>{selectedCard.name}</h2>
-                <p className="modal__weather">
-                  Weather: {selectedCard.weather}
-                </p>
-                <button onClick={() => setActiveModal(MODAL.DELETE)}>
-                  Delete
-                </button>
-              </div>
-            ) : (
-              <p>Loading item...</p>
-            )
-          ) : null}
+          {activeModal === MODAL.PREVIEW && selectedCard && (
+            <ItemModal
+              item={selectedCard}
+              onDeleteClick={() => setActiveModal(MODAL.DELETE)}
+            />
+          )}
           {activeModal === MODAL.ADD && (
             <AddItemModal onAddItem={handleAddItem} onClose={closeModal} />
           )}
@@ -217,7 +172,6 @@ function App() {
           )}
           {activeModal === MODAL.EDIT_PROFILE && (
             <ProfileModal
-              activeModal={activeModal}
               onClose={closeModal}
               onSubmit={(e) => {
                 e.preventDefault();
@@ -237,6 +191,7 @@ function App() {
           )}
         </Modal>
       </div>
+
       <Footer />
     </CurrentTemperatureUnitContext.Provider>
   );
