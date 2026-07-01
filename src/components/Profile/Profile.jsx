@@ -1,3 +1,4 @@
+import "./Profile.module.css";
 import SideBar from "../SideBar/SideBar.jsx";
 function Profile({ username, setUsername, onClose, onEdit }) {
   return (
