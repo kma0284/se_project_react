@@ -1,13 +1,9 @@
-
-
-
-.sidebar__avatar{
+.sidebar__avatar {
   position: relative;
   width: 56px;
 }
 .cards__text {
   font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
   font-weight: 700;
-  font-style: Bold;
   font-size: 20px;
 }

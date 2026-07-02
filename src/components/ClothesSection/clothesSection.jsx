@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import ItemCard from "../ItemCard/ItemCard";
 import "./ClothesSection.css";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 export default function ClothesSection({
   items,
@@ -8,6 +10,8 @@ export default function ClothesSection({
   isProfileOpen,
   onAddClick,
 }) {
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+
   if (!weatherData?.type) return null;
 
   const filteredItems = isProfileOpen
@@ -29,7 +33,8 @@ export default function ClothesSection({
         </div>
       ) : (
         <h2 className="clothes-section__title">
-          Today is {temp?.f}°F / {temp?.c}°C — you may want to wear:
+          Today is {temp?.[currentTemperatureUnit]}°
+          {currentTemperatureUnit.toUpperCase()} — you may want to wear:
         </h2>
       )}
 

@@ -13,13 +13,11 @@
 }
 
 .sidebar {
-  width: 320px;
+  max-width: 320px;
   flex-shrink: 0;
   background: #fff;
-  padding: 24px;
   display: flex;
   flex-direction: column;
-  /* position: sticky; */
   top: 80px;
   align-self: flex-start;
   z-index: 10;

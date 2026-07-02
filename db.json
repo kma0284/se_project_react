@@ -123,6 +123,18 @@
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png",
       "weather": "hot",
       "_id": "125c7b7c-3563-42f6-a342-ed8dd531d9a6"
+    },
+    {
+      "name": "winter coat",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png",
+      "weather": "hot",
+      "_id": 17
+    },
+    {
+      "name": "winter coat",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png",
+      "weather": "hot",
+      "_id": 18
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

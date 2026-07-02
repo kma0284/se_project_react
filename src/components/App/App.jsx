@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
-
-import { APIkey } from "../../utils/constants";
+import { apiKey } from "../../utils/constants";
 import {
   getCurrentCoordinates,
   getWeather,
@@ -67,7 +66,7 @@ function App() {
 
   useEffect(() => {
     getCurrentCoordinates()
-      .then((coords) => getWeather(coords, APIkey))
+      .then((coords) => getWeather(coords, apiKey))
       .then((data) => setWeatherData(filterWeatherData(data)))
       .catch(console.error);
   }, []);
@@ -86,22 +85,16 @@ function App() {
     setActiveModal(MODAL.PREVIEW);
   };
 
-  function handleAddItem(values) {
-    addItem(values)
-      .then((newItem) => {
-        setItems((prev) => [newItem, ...prev]);
-      })
-      .catch(console.error);
-  }
+  const handleAddItem = (item) => {
+    return addItem(item).then((newItem) => {
+      setItems((prev) => [newItem, ...prev]);
+      return newItem;
+    });
+  };
 
   function handleDeleteItem(item) {
-    console.log("Deleting item:", item);
-    console.log("Deleting _id:", item._id);
-
     deleteItem(item._id)
       .then(() => {
-        console.log("Delete successful");
-
         setItems((prev) => prev.filter((i) => i._id !== item._id));
         closeModal();
       })

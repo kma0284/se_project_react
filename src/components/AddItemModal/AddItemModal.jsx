@@ -9,8 +9,7 @@ function AddItemModal({ onAddItem, onClose, isOpen }) {
     imageUrl: "",
     weather: "",
   });
-  console.log(values);
-  console.log("VALID:", isValid);
+
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -18,16 +17,16 @@ function AddItemModal({ onAddItem, onClose, isOpen }) {
       name: values.name,
       imageUrl: values.imageUrl,
       weather: values.weather,
-      _id: crypto.randomUUID(),
-    });
-    console.log(values.name, values.imageUrl, values.weather);
-    resetForm();
-    onClose();
+    })
+      .then(() => {
+        onClose();
+        resetForm();
+      })
+      .catch((err) => {
+        console.error("Failed to add item:", err);
+      });
   };
-  useEffect(() => {
-    console.log("VALUES:", values);
-    console.log("IS VALID:", isValid);
-  }, [values, isValid]);
+  useEffect(() => {}, [values, isValid]);
   return (
     <ModalWithForm
       isOpen={isOpen}
@@ -49,6 +48,7 @@ function AddItemModal({ onAddItem, onClose, isOpen }) {
             value={values.name}
             onChange={handleChange}
             className="modal__input"
+            required
           />
         </div>
 

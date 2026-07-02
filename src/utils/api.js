@@ -23,17 +23,16 @@ export function addItem(item) {
   }).then(handleResponse);
 }
 
-// DELETE item
-// export function deleteItem(id) {
-//   return fetch(`${BASE_URL}/items/${id}`, {
-//     method: "DELETE",
-//   }).then(handleResponse);
-// }
-
 export function deleteItem(id) {
-  console.log("DELETE URL:", `${BASE_URL}/items/${id}`);
-
   return fetch(`${BASE_URL}/items/${id}`, {
     method: "DELETE",
   }).then(handleResponse);
 }
+export const checkResponse = (res) => {
+  if (!res.ok) throw new Error(`Error: ${res.status}`);
+  return res.json();
+};
+
+export const request = (url, options) => {
+  return fetch(url, options).then(checkResponse);
+};

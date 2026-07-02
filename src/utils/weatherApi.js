@@ -1,3 +1,5 @@
+import { checkResponse } from "./api";
+
 export const getCurrentCoordinates = () => {
   const fallback = {
     latitude: 28.5383, // Orlando
@@ -29,13 +31,10 @@ export const getCurrentCoordinates = () => {
   });
 };
 
-export const getWeather = ({ latitude, longitude }, APIkey) => {
+export const getWeather = ({ latitude, longitude }, apiKey) => {
   return fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`,
-  ).then((res) => {
-    if (res.ok) return res.json();
-    return Promise.reject(`Error: ${res.status}`);
-  });
+    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`,
+  ).then(checkResponse);
 };
 
 export function getWeatherCondition(tempF) {

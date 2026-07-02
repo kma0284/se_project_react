@@ -33,7 +33,7 @@
   right: 10px;
 }
 /* slider knob  */
-.slider {
+/* .slider {
   position: absolute;
   top: 2px;
   left: 2px;
@@ -43,30 +43,7 @@
   border-radius: 50%;
   transition: transform 0.3s ease;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* when checked → move knob to right */
-.switch input:checked ~ .slider {
-  transform: translateX(32px);
-}
-
-/* active text styling */
-.switch input:checked ~ .switch__text_f {
-  color: #FFF;
-}
-
-.switch input:not(:checked) ~ .switch__text_c {
-  color: #00000080;
-}
-
-/* active state highlight */
-.switch input:checked ~ .switch__text_c {
-  color: #FFF;
-}
-
-.switch input:not(:checked) ~ .switch__text_f {
-  color: #FFF;
-}
+} */
 .slider {
   position: absolute;
   top: 2px;
@@ -77,4 +54,27 @@
   border-radius: 20px;
   transition: transform 0.3s ease;
   z-index: 0;
+}
+
+/* when checked → move knob to right */
+.switch input:checked ~ .slider {
+  transform: translateX(32px);
+}
+
+/* active text styling */
+.switch input:checked ~ .switch__text_f {
+  color: #fff;
+}
+
+.switch input:not(:checked) ~ .switch__text_c {
+  color: #00000080;
+}
+
+/* active state highlight */
+.switch input:checked ~ .switch__text_c {
+  color: #fff;
+}
+
+.switch input:not(:checked) ~ .switch__text_f {
+  color: #fff;
 }

@@ -1,6 +1,6 @@
 // The utils files contain default clothing items
 
-export const APIkey = "2e9014c51ecac7a69e804a5fd3b52afb";
+export const apiKey = "2e9014c51ecac7a69e804a5fd3b52afb";
 
 export const weatherOptions = [
   {

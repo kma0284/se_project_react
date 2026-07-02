@@ -3,7 +3,7 @@ import "./SideBar.css";
 function SideBar({ username, onEdit }) {
   return (
     <div className="sidebar">
-      <div className="sideBar__user">
+      <div className="sidebar__user">
         <img
           className="sidebar__avatar"
           src="https://practicum-content.s3.us-west-1.amazonaws.com/frontend-developer/common/avatar.jpg"
