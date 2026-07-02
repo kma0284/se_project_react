@@ -22,7 +22,9 @@ export function Header({
       <Link to="/">
         <img src={logo} alt="header logo" className="header__logo" />
       </Link>
-
+      <Link to="/profile" className="header__profile-link">
+        Profile
+      </Link>
       <p className="header__date-and-location">
         {currentDate}, {weatherData?.city || "Loading..."}
       </p>
@@ -49,7 +51,6 @@ export function Header({
           alt="avatar image"
           className="header__avatar"
           onClick={onAvatarClick}
-          
         />
       </div>
     </header>

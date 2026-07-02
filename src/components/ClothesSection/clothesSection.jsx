@@ -1,7 +1,13 @@
 import ItemCard from "../ItemCard/ItemCard";
 import "./ClothesSection.css";
 
-export default function ClothesSection({ items, weatherData, onCardClick, isProfileOpen, onAddClick }) {
+export default function ClothesSection({
+  items,
+  weatherData,
+  onCardClick,
+  isProfileOpen,
+  onAddClick,
+}) {
   if (!weatherData?.type) return null;
 
   const filteredItems = isProfileOpen
@@ -11,7 +17,9 @@ export default function ClothesSection({ items, weatherData, onCardClick, isProf
   const temp = weatherData.temp;
 
   return (
-    <section className="clothes-section">
+    <section
+      className={`clothes-section ${isProfileOpen ? "sidebar-open" : ""}`}
+    >
       {isProfileOpen ? (
         <div className="clothes-section__header">
           <h2>Your items</h2>

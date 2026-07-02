@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 import "./App.css";
 
@@ -14,11 +14,12 @@ import Modal from "../Modal/Modal.jsx";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
+import ClothesSection from "../ClothesSection/ClothesSection.jsx";
+import Profile from "../Profile/Profile.jsx";
 import ProfileModal from "../ProfileModal/ProfileModal.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
-import SideBar from "../SideBar/SideBar.jsx";
 
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
@@ -31,9 +32,9 @@ const MODAL = {
 
 function App() {
   // ---------------- STATE ----------------
+  const navigate = useNavigate();
   const [activeModal, setActiveModal] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const [clothingItems, setClothingItems] = useState([]);
   const [weatherData, setWeatherData] = useState({
@@ -69,7 +70,6 @@ function App() {
 
   // ---------------- MODAL CONTROLS ----------------
   const openModal = (type) => {
-    setIsProfileOpen(false);
     setActiveModal(type);
   };
 
@@ -83,7 +83,6 @@ function App() {
   };
   // ---------------- HANDLERS ----------------
   const handleCardClick = (card) => {
-    setIsProfileOpen(false);
     setSelectedCard(card);
     setActiveModal(MODAL.PREVIEW);
   };
@@ -116,19 +115,11 @@ function App() {
         username={username}
         setUsername={setUsername}
         handleAddClick={() => openModal(MODAL.ADD)}
-        onAvatarClick={() => setIsProfileOpen((open) => !open)}
+        onAvatarClick={() => navigate("/profile")}
       />
 
-      <div className={`app-layout ${isProfileOpen ? "sidebar-open" : ""}`}>
+      <div className="app-layout">
         <div className="main-content">
-          {isProfileOpen && (
-            <SideBar
-              username={username}
-              onClose={() => setIsProfileOpen(false)}
-              onEdit={handleEditProfile}
-            />
-          )}
-
           <Routes>
             <Route
               path="/"
@@ -137,14 +128,34 @@ function App() {
                   weatherData={weatherData}
                   clothingItems={clothingItems}
                   onCardClick={handleCardClick}
-                  isProfileOpen={isProfileOpen}
                   onAddClick={() => openModal(MODAL.ADD)}
                 />
               }
             />
+            <Route
+              path="/profile"
+              element={
+                <>
+                  {activeModal === null && (
+                    <Profile
+                      username={username}
+                      setUsername={setUsername}
+                      onClose={() => navigate("/")}
+                      onEdit={handleEditProfile}
+                    />
+                  )}
+                  <ClothesSection
+                    items={clothingItems}
+                    weatherData={weatherData}
+                    onCardClick={handleCardClick}
+                    isProfileOpen={activeModal === null}
+                    onAddClick={() => openModal(MODAL.ADD)}
+                  />
+                </>
+              }
+            />
           </Routes>
         </div>
-
         {/* SINGLE MODAL SYSTEM */}
         <Modal
           isOpen={activeModal !== null}

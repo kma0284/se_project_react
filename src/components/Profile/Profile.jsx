@@ -1,5 +1,6 @@
 import "./Profile.css";
 import SideBar from "../SideBar/SideBar.jsx";
+
 function Profile({ username, setUsername, onClose, onEdit }) {
   return (
     <section className="profile" onClick={(e) => e.stopPropagation()}>
