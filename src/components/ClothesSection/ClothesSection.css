@@ -1,9 +1,7 @@
-
-
 .cards__list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 20px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -12,35 +10,6 @@
 /* Sidebar open — 3 columns */
 .sidebar-open .cards__list {
   grid-template-columns: repeat(3, 1fr);
-}
-
-/* Medium screens */
-@media (max-width: 900px) {
-  .cards__list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .sidebar-open .cards__list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Small screens */
-@media (max-width: 600px) {
-  .cards__list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .sidebar-open .cards__list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Very small screens */
-@media (max-width: 380px) {
-  .cards__list {
-    grid-template-columns: 1fr;
-  }
 }
 
 .clothes-section__header {
@@ -57,34 +26,53 @@
 
 .clothes-section__title {
   font-family: "Cabinet Grotesk", Arial, sans-serif;
-font-weight: 700;
-font-style: Bold;
-font-size: 20px;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
 
   margin-bottom: 34px;
 }
 
 .clothes-section__add-btn {
   background: none;
-   border: none; 
+  border: none;
   padding: 5px 12px;
   font-size: 20px;
   cursor: pointer;
-  color:  #00000099;
-;
+  color: #00000099;
   font-family: "Cabinet Grotesk", Arial, sans-serif;
-font-weight: 700;
-font-style: Bold;
-font-size: 20px;
-line-height: 100%;
-
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  line-height: 100%;
 }
 
 .clothes-section__add-btn:hover {
-  background: rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .clothes-section__empty {
   color: #888;
   font-size: 14px;
+}
+/* Medium screens */
+@media (max-width: 900px) {
+  .cards__list {
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+  }
+
+  .sidebar-open .cards__list {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+}
+
+/* Small screens */
+@media (max-width: 600px) {
+  .cards__list {
+    grid-template-columns: repeat(1, minmax(180px, 1fr));
+  }
+
+  .sidebar-open .cards__list {
+    grid-template-columns: repeat(1, minmax(80px, 1fr));
+  }
 }

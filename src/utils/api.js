@@ -1,30 +1,39 @@
-const baseUrl = "http://localhost:3000";
+const BASE_URL = "http://localhost:3001";
 
-function checkResponse(res) {
-  if (res.ok) return res.json();
-  return Promise.reject(`Error: ${res.status}`);
+function handleResponse(res) {
+  if (!res.ok) {
+    return Promise.reject(`Error: ${res.status}`);
+  }
+  return res.json();
 }
 
-//
-// ---------------- CLOTHING API ----------------
-//
+// GET all items
+export function getItems() {
+  return fetch(`${BASE_URL}/items`).then(handleResponse);
+}
 
-export const getItems = () => {
-  return fetch(`${baseUrl}/items`).then(checkResponse);
-};
-
-export const addItem = (item) => {
-  return fetch(`${baseUrl}/items`, {
+// POST new item
+export function addItem(item) {
+  return fetch(`${BASE_URL}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(item),
-  }).then(checkResponse);
-};
+  }).then(handleResponse);
+}
 
-export const deleteItem = (id) => {
-  return fetch(`${baseUrl}/items/${id}`, {
+// DELETE item
+// export function deleteItem(id) {
+//   return fetch(`${BASE_URL}/items/${id}`, {
+//     method: "DELETE",
+//   }).then(handleResponse);
+// }
+
+export function deleteItem(id) {
+  console.log("DELETE URL:", `${BASE_URL}/items/${id}`);
+
+  return fetch(`${BASE_URL}/items/${id}`, {
     method: "DELETE",
-  }).then(checkResponse);
-};
+  }).then(handleResponse);
+}

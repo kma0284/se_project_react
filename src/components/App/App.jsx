@@ -1,25 +1,27 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 
-import { APIkey, defaultClothingItems } from "../../utils/constants.js";
+import { APIkey } from "../../utils/constants";
 import {
+  getCurrentCoordinates,
   getWeather,
   filterWeatherData,
-  getCurrentCoordinates,
-} from "../../utils/weatherApi.js";
+} from "../../utils/weatherApi";
 
-import Modal from "../Modal/Modal.jsx";
-import Header from "../Header/Header.jsx";
-import Main from "../Main/Main.jsx";
-import Footer from "../Footer/Footer.jsx";
-import ClothesSection from "../ClothesSection/ClothesSection.jsx";
-import Profile from "../Profile/Profile.jsx";
-import ProfileModal from "../ProfileModal/ProfileModal.jsx";
-import AddItemModal from "../AddItemModal/AddItemModal.jsx";
-import ItemModal from "../ItemModal/ItemModal.jsx";
+import { getItems, addItem, deleteItem } from "../../utils/api";
+
+import Header from "../Header/Header";
+import Main from "../Main/Main";
+import Profile from "../Profile/Profile";
+import Footer from "../Footer/Footer";
+
+import Modal from "../Modal/Modal";
+import AddItemModal from "../AddItemModal/AddItemModal";
+import ItemModal from "../ItemModal/ItemModal";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
+import ProfileModal from "../ProfileModal/ProfileModal";
 
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
@@ -32,15 +34,17 @@ const MODAL = {
 
 function App() {
   // ---------------- STATE ----------------
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [activeModal, setActiveModal] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
-
-  const [clothingItems, setClothingItems] = useState([]);
+  const [items, setItems] = useState([]);
   const [weatherData, setWeatherData] = useState({
-    type: "",
-    temp: { f: 999 },
     city: "",
+    type: "",
+    temp: {
+      f: 0,
+      c: 0,
+    },
   });
 
   const [username, setUsername] = useState(
@@ -50,36 +54,31 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("f");
 
   // ---------------- EFFECTS ----------------
+  //load clothing items from API on mount
   useEffect(() => {
-    setClothingItems(defaultClothingItems);
+    getItems()
+      .then((data) => setItems(data))
+      .catch(console.error);
   }, []);
-
+  //save username to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("username", username);
   }, [username]);
 
   useEffect(() => {
-    const DEFAULT_COORDS = { latitude: 28.5383, longitude: -81.3792 };
-
     getCurrentCoordinates()
-      .catch(() => DEFAULT_COORDS)
       .then((coords) => getWeather(coords, APIkey))
-      .then((res) => setWeatherData(filterWeatherData(res)))
+      .then((data) => setWeatherData(filterWeatherData(data)))
       .catch(console.error);
   }, []);
 
   // ---------------- MODAL CONTROLS ----------------
-  const openModal = (type) => {
-    setActiveModal(type);
+  const openModal = (modal) => {
+    setActiveModal(modal);
   };
 
   const closeModal = () => {
     setActiveModal(null);
-  };
-  const handleEditProfile = () => {
-    setActiveModal((current) =>
-      current === MODAL.EDIT_PROFILE ? null : MODAL.EDIT_PROFILE,
-    );
   };
   // ---------------- HANDLERS ----------------
   const handleCardClick = (card) => {
@@ -87,22 +86,30 @@ function App() {
     setActiveModal(MODAL.PREVIEW);
   };
 
-  const handleAddItem = (item) => {
-    setClothingItems((prev) => [
-      { ...item, _id: crypto.randomUUID() },
-      ...prev,
-    ]);
-    closeModal();
-  };
+  function handleAddItem(values) {
+    addItem(values)
+      .then((newItem) => {
+        setItems((prev) => [newItem, ...prev]);
+      })
+      .catch(console.error);
+  }
 
-  const handleDeleteItem = (item) => {
-    setClothingItems((prev) => prev.filter((i) => i._id !== item._id));
-    setSelectedCard(null);
-    closeModal();
-  };
+  function handleDeleteItem(item) {
+    console.log("Deleting item:", item);
+    console.log("Deleting _id:", item._id);
+
+    deleteItem(item._id)
+      .then(() => {
+        console.log("Delete successful");
+
+        setItems((prev) => prev.filter((i) => i._id !== item._id));
+        closeModal();
+      })
+      .catch(console.error);
+  }
 
   const handleToggleSwitchChange = () => {
-    setCurrentTemperatureUnit((prev) => (prev === "f" ? "c" : "f"));
+    setCurrentTemperatureUnit((unit) => (unit === "f" ? "c" : "f"));
   };
 
   // ---------------- RENDER ----------------
@@ -125,7 +132,7 @@ function App() {
               element={
                 <Main
                   weatherData={weatherData}
-                  clothingItems={clothingItems}
+                  clothingItems={items}
                   onCardClick={handleCardClick}
                   onAddClick={() => openModal(MODAL.ADD)}
                 />
@@ -134,26 +141,15 @@ function App() {
             <Route
               path="/profile"
               element={
-                activeModal === null ? (
-                  <Profile
-                    username={username}
-                    setUsername={setUsername}
-                    onClose={() => navigate("/")}
-                    onEdit={handleEditProfile}
-                    clothingItems={clothingItems}
-                    weatherData={weatherData}
-                    onCardClick={handleCardClick}
-                    onAddClick={() => openModal(MODAL.ADD)}
-                  />
-                ) : (
-                  <ClothesSection
-                    items={clothingItems}
-                    weatherData={weatherData}
-                    onCardClick={handleCardClick}
-                    isProfileOpen={false}
-                    onAddClick={() => openModal(MODAL.ADD)}
-                  />
-                )
+                <Profile
+                  username={username}
+                  setUsername={setUsername}
+                  clothingItems={items}
+                  weatherData={weatherData}
+                  onCardClick={handleCardClick}
+                  onAddClick={() => openModal(MODAL.ADD)}
+                  onEdit={() => openModal(MODAL.EDIT_PROFILE)}
+                />
               }
             />
           </Routes>

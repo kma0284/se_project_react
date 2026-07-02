@@ -11,6 +11,7 @@ function Profile({
   weatherData,
   onCardClick,
   onAddClick,
+  handleDeleteItem,
 }) {
   return (
     <section className="profile-page" onClick={(e) => e.stopPropagation()}>
@@ -26,6 +27,7 @@ function Profile({
         onCardClick={onCardClick}
         isProfileOpen={true}
         onAddClick={onAddClick}
+        onDelete={handleDeleteItem}
       />
     </section>
   );

@@ -1,14 +1,11 @@
 import "./ModalWithForm.css";
-// import Modal from "../Modal/Modal.jsx";
 export default function ModalWithForm({
   title,
   children,
   onSubmit,
   buttonText,
   isValid,
-  
 }) {
-
   return (
     <form className="modal__form" onSubmit={onSubmit}>
       <h2 className="modal__title">{title}</h2>
@@ -22,7 +19,6 @@ export default function ModalWithForm({
       >
         {buttonText}
       </button>
-      
     </form>
   );
 }
