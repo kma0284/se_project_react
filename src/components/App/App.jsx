@@ -117,14 +117,14 @@ function App() {
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
     >
-      <Header
-        weatherData={weatherData}
-        username={username}
-        setUsername={setUsername}
-        handleAddClick={() => openModal(MODAL.ADD)}
-      />
-
       <div className="app-layout">
+        <Header
+          weatherData={weatherData}
+          username={username}
+          setUsername={setUsername}
+          handleAddClick={() => openModal(MODAL.ADD)}
+        />
+
         <div className="main-content">
           <Routes>
             <Route

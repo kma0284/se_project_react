@@ -1,6 +1,7 @@
 import "./Profile.css";
 import SideBar from "../SideBar/SideBar.jsx";
 import ClothesSection from "../ClothesSection/ClothesSection.jsx";
+import { Link } from "react-router-dom";
 
 function Profile({
   username,
@@ -21,6 +22,9 @@ function Profile({
         onClose={onClose}
         onEdit={onEdit}
       />
+      <Link to="/" className="profile__back-btn">
+        ← Back
+      </Link>
       <ClothesSection
         items={clothingItems}
         weatherData={weatherData}

@@ -1,8 +1,8 @@
 .header {
   display: flex;
   align-items: center;
+  position: relative;
   max-width: 1360px;
-  padding: 32px 40px 28px;
   margin: 0 auto;
 }
 .header__logo {
@@ -72,7 +72,9 @@
     padding: 20px 16px;
     gap: 12px;
     text-align: center;
-    position: sticky;
+
+    top: 0;
+    background: white;
   }
 
   .header__logo {

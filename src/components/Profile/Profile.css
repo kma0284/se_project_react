@@ -2,11 +2,16 @@
   display: flex;
   gap: 32px;
   align-items: flex-start;
+  max-width: 1360px;
+  margin: 0 auto;
+  width: 100%;
 }
+
 .profile-page .clothes-section {
   flex: 1;
   min-width: 0;
 }
+
 .sidebar {
   width: 320px;
   flex-shrink: 0;
@@ -14,30 +19,45 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
-  position: sticky;
-  top: 20px;
-  height: fit-content;
+  /* position: sticky; */
+  top: 80px;
+  align-self: flex-start;
   z-index: 10;
-  transform: translateX(0);
   animation: slideIn 0.3s forwards;
 }
-@media (max-width: 768px) {
-  .sidebar__user {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 12px;
-  }
+.profile__back-btn {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+}
 
-  .sidebar__avatar {
-    width: 96px;
-    height: 96px;
-  }
+.profile__back-btn:hover {
+  opacity: 0.7;
+}
+@media (max-width: 768px) {
   .profile-page {
     flex-direction: column;
     gap: 20px;
     padding: 0 16px;
+    align-items: center;
+  }
+}
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    max-width: none;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: static;
+    padding: 24px;
+
+    border-radius: 18px;
+    background: #fff;
   }
 }
 @keyframes slideIn {

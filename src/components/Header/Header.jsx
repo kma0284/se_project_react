@@ -2,7 +2,7 @@ import "./Header.css";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch.jsx";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function Header({
   handleAddClick,
@@ -11,14 +11,6 @@ export function Header({
   currentTemperatureUnit,
   handleToggleSwitchChange,
 }) {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const isProfileOpen = location.pathname === "/profile";
-
-  const handleProfileToggle = () => {
-    navigate(isProfileOpen ? "/" : "/profile");
-  };
-
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -49,20 +41,13 @@ export function Header({
       </button>
 
       <div className="header__user-container">
-        <button
-          onClick={handleProfileToggle}
-          className="header__username header__username_link"
-          type="button"
-        >
+        <Link to="/profile" className="header__username header__username_link">
           {username}
-        </button>
+        </Link>
 
-        <img
-          src={avatar}
-          alt="avatar image"
-          className="header__avatar"
-          onClick={handleProfileToggle}
-        />
+        <Link to="/profile">
+          <img src={avatar} alt="avatar image" className="header__avatar" />
+        </Link>
       </div>
     </header>
   );
