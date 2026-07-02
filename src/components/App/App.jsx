@@ -115,7 +115,6 @@ function App() {
         username={username}
         setUsername={setUsername}
         handleAddClick={() => openModal(MODAL.ADD)}
-        onAvatarClick={() => navigate("/profile")}
       />
 
       <div className="app-layout">
@@ -135,23 +134,26 @@ function App() {
             <Route
               path="/profile"
               element={
-                <>
-                  {activeModal === null && (
-                    <Profile
-                      username={username}
-                      setUsername={setUsername}
-                      onClose={() => navigate("/")}
-                      onEdit={handleEditProfile}
-                    />
-                  )}
+                activeModal === null ? (
+                  <Profile
+                    username={username}
+                    setUsername={setUsername}
+                    onClose={() => navigate("/")}
+                    onEdit={handleEditProfile}
+                    clothingItems={clothingItems}
+                    weatherData={weatherData}
+                    onCardClick={handleCardClick}
+                    onAddClick={() => openModal(MODAL.ADD)}
+                  />
+                ) : (
                   <ClothesSection
                     items={clothingItems}
                     weatherData={weatherData}
                     onCardClick={handleCardClick}
-                    isProfileOpen={activeModal === null}
+                    isProfileOpen={false}
                     onAddClick={() => openModal(MODAL.ADD)}
                   />
-                </>
+                )
               }
             />
           </Routes>

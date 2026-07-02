@@ -28,7 +28,7 @@
   border: none;
   gap: 12px;
   cursor: pointer;
-background: none;
+  background: none;
   font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-style: Bold;
@@ -46,6 +46,19 @@ background: none;
   font-style: Bold;
   font-size: 20px;
   cursor: pointer;
+}
+.header__username_link {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--text-accent, #185fa5);
+  text-decoration: underline;
+  font: inherit;
+}
+
+.header__username_link:hover {
+  opacity: 0.8;
 }
 .header__avatar {
   height: 40px;
